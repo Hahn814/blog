@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 
 # Django
-from django.http import HttpResponse
+from django.shortcuts import render
 
 def home(request):
-    return HttpResponse('<h1>Blog Home</h1>')
+    return render(request=request, template_name='blog/home.html', context={})
+
+def about(request):
+    return render(request=request, template_name='blog/about.html', context={})
