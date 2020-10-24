@@ -1,0 +1,35 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+#content {
+  width: 85%;
+}
+
+#toggle-sidebar {
+  width: 30px;
+  height: 30px;
+  float: right;
+}
+
+#sidebar, #content {
+  height: 100%;
+  overflow:auto;
+  float:right;
+  transition: width .35s;
+}
+
+#sidebar {
+  background:gray;
+  width: 15%;
+}
+
+#sidebar.collapsed {
+  width: 0;
+}
+
+#sidebar.collapsed + #content {
+  width: 100%;
+}
