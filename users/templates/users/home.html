@@ -1,0 +1,14 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+    {% for user_profile in user_profiles %}
+        {% if user_profile.user.name %}
+            <h1>{{ user_profile.name }}</h1>
+        {% else %}
+            <h1>{{ user_profile.username }}</h1>
+        {% endif %}
+
+        {% for post in user_profile.get_posts %}
+            <h2>{{ post.title }}</h2>
+        {% endfor %}
+    {% endfor %}
+{% endblock content %}

@@ -1,0 +1,9 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    {% if user_profile.name %}
+        <h1>User Profile - {{ user_profile.name }}</h1>
+    {% else %}
+        <h1>User Profile - {{ user_profile.username }}</h1>
+    {% endif %}
+{% endblock %}

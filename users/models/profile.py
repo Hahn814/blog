@@ -7,6 +7,14 @@ class UserProfileBase(models.Model):
         on_delete=models.CASCADE
     )
 
+    @property
+    def name(self):
+        return self.user.get_full_name()
+
+    @property
+    def username(self):
+        return self.user.get_username()
+    
     def __str__(self):
         return "{username} UserProfile".format(username=self.user.get_username())
 
