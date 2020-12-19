@@ -11,6 +11,7 @@ html, body {
 
 #content {
     width: 85%;
+    padding-left: 10px;
 }
 
 #sidebar {

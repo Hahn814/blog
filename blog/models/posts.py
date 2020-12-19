@@ -6,6 +6,8 @@ Blog post models
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from tinymce.models import HTMLField
+
 import logging
 
 LOGGER = logging.getLogger(__name__)
@@ -27,7 +29,7 @@ class PostBase(models.Model):
     title = models.CharField(
         max_length=100
     )
-    content = models.TextField()
+    content = HTMLField()
     date_posted = models.DateTimeField(
         default=timezone.now
     )

@@ -15,3 +15,13 @@
   color: #fff;
   padding: 10px 10px 10px 10px;
 }
+
+.nav-title a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.nav-title a:hover {
+  color: #4d4d4d;
+  text-decoration: none;
+}
