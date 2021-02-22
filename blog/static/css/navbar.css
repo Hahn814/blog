@@ -3,6 +3,7 @@
   width: 100%;
   background-color: #4d4d4d;
   position: relative;
+  grid-area: header;
 }
 
 .nav > .nav-header {

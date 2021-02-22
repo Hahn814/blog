@@ -16,7 +16,6 @@ function assignIcon(){
 
 assignIcon()  // Assign the default icon on page load.
 button.addEventListener('click', _ => {
-  console.log("HERE");
   sidebar.classList.toggle('collapsed');
   assignIcon();
 });

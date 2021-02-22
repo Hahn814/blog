@@ -1,0 +1,10 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <post-item
+        title="{{ object.title }}"
+        date="{{ object.date_posted }}"
+        author="{{ object.author }}"
+        content="{{ object.content | safe }}"
+></post-item>
+{% endblock content %}

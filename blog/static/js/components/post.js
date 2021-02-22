@@ -1,81 +1,114 @@
 class Post extends HTMLElement {
   constructor() {
     super();
+    this.postBodayClass = 'post-body';
 
     // Create a shadow root
     const shadow = this.attachShadow({mode: 'open'});    // Sets and returns this.shadowRoot
-    let style = null;
 
     // Create (nested) span elements
-    const wrapper = document.createElement('span');
-    wrapper.setAttribute('class', 'wrapper');
+    const contentWrapper = document.createElement('div');
+    contentWrapper.setAttribute('class', 'wrapper');
+    contentWrapper.setAttribute('style', `
+    overflow: auto;
+    `);
 
-    const title = wrapper.appendChild(
-        document.createElement('span')
+    const header = contentWrapper.appendChild(
+        document.createElement('div')
     );
+    header.setAttribute('class', 'post-header');
+
+    const title = header.appendChild(
+        document.createElement('h2')
+    );
+
     title.setAttribute('class','title');
     // Take attribute content and put it inside the info span
     title.textContent = this.getAttribute('title');
-    style = title.appendChild(
-        document.createElement('style')
-    );
-    style.textContent = `
-    color: red;
-    `;
 
-    // Add the collapse button
-    const btn = wrapper.appendChild(
+    const author = header.appendChild(
         document.createElement('span')
     );
-    btn.setAttribute('class', 'post-collapse');
-    btn.setAttribute('tabindex', 0);
-    btn.innerHTML = '<ion-icon name="chevron-up-outline"></ion-icon>';
-    style = btn.appendChild(
-        document.createElement('style')
-    );
-    style.textContent = `color: blue;`;
+    author.setAttribute('class','author');
+    author.setAttribute('style', `
+      float: left;
+      padding-left: 10px;
+      font-weight: bold;
+    `);
+    // Take attribute content and put it inside the info span
+    author.textContent = this.getAttribute('author');
 
-    const date = wrapper.appendChild(
+    const date = header.appendChild(
         document.createElement('span')
     );
     date.setAttribute('class','date');
     // Take attribute content and put it inside the info span
     date.textContent = this.getAttribute('date');
-    style = date.appendChild(
-        document.createElement('style')
-    );
-    style.textContent = `color: orange;`;
+    date.setAttribute('style', `
+      padding-left: 10px;
+      font-style: italic;
+    `);
 
-    const author = wrapper.appendChild(
-        document.createElement('span')
-    );
-    author.setAttribute('class','author');
-    // Take attribute content and put it inside the info span
-    author.textContent = this.getAttribute('author');
-    style = author.appendChild(
-        document.createElement('style')
-    );
 
-    style.textContent = `color: pink;`;
+    const body = contentWrapper.appendChild(
+        document.createElement('div')
+    );
+    body.setAttribute('class', 'post-body');
+    body.setAttribute('style', `
+      padding-left: 20px;
+    `);
 
-    const content = wrapper.appendChild(
-        document.createElement('span')
+    const content = body.appendChild(
+        document.createElement('div')
     );
     content.setAttribute('class','content');
+    content.setAttribute('style', `
+    `);
+
     // Take attribute content and put it inside the info span
     content.innerHTML = this.getAttribute('content');
-    style = content.appendChild(
-        document.createElement('style')
-    );
-    style.textContent = `color: black;`;
 
-    style = document.createElement('style');
-    style.textContent = `color: green`;
-    shadow.appendChild(style);
-    shadow.appendChild(wrapper);
-
-    console.log(shadow);
+    contentWrapper.appendChild(body);
+    const footer = document.createElement('div')
+    footer.setAttribute('class', 'post-footer');
+    shadow.appendChild(contentWrapper);
   }
+
+  connectedCallback() {
+    console.log('Custom Post element added to page.');
+    applyCollpaseEvent( this , this.postBodayClass );
+  }
+
+  disconnectedCallback() {
+    console.log('Custom Post element removed from page.');
+  }
+
+  adoptedCallback() {
+    console.log('Custom Post element moved to new page.');
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    console.log('Custom Post element attributes changed.');
+    updateStyle(this);
+  }
+
 }
 
 customElements.define('post-item', Post);
+
+function applyCollpaseEvent( elem, div ) {
+  const shadow = elem.shadowRoot;
+  shadow.querySelector('.post-collapse').addEventListener('click', function () {
+    this.classList.toggle('collapsed');
+    const wrapper = shadow.querySelector('.' + div);
+
+    if ( this.classList.contains('collapsed') ){
+      wrapper.style.display = "none";
+      this.innerHTML = '<ion-icon name="chevron-down-outline"></ion-icon>';
+
+    } else {
+      wrapper.style.display = "block";
+      this.innerHTML = '<ion-icon name="chevron-up-outline"></ion-icon>';
+    }
+  });
+}

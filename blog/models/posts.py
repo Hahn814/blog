@@ -12,6 +12,7 @@ import logging
 
 LOGGER = logging.getLogger(__name__)
 
+
 class PostTagBase(models.Model):
     tag_name = models.CharField(
         max_length=50
@@ -24,6 +25,7 @@ class PostTagBase(models.Model):
         return {
             'tag_name': self.tag_name
         }
+
 
 class PostBase(models.Model):
     title = models.CharField(

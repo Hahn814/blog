@@ -2,11 +2,15 @@
 
 {% block content %}
     {% for post in posts %}
-        <post-item
-            title="{{ post.title }}"
-            date="{{ post.date_posted }}"
-            author="{{ post.author }}"
-            content="{{ post.content | safe }}"
-    ></post-item>
+        <h2>
+        <a class="post-title" href="{% url 'post-view' pk=post.pk %}">
+            {{ post.title }}
+        </a>
+        </h2>
+        <div class="post-meta">
+            <span class="post-author">{{  post.author }}</span>
+            <span class="post-date">{{ post.date_posted }}</span>
+
+        </div>
     {% endfor %}
 {% endblock content %}

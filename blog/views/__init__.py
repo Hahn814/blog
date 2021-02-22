@@ -4,6 +4,7 @@
 from django.shortcuts import render
 from blog.models import BlogPost
 
+
 def home(request):
     title = 'Home'
     posts = BlogPost.objects.all().order_by('-id')[:10]
@@ -13,6 +14,7 @@ def home(request):
         'title': title
     }
     return render(request=request, template_name='blog/home.html', context=context)
+
 
 def about(request):
     title = 'About'

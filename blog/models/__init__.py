@@ -4,6 +4,7 @@ import logging
 
 LOGGER = logging.getLogger(__name__)
 
+
 class BlogPostTag(PostTagBase):
 
     def __repr__(self):
@@ -11,6 +12,7 @@ class BlogPostTag(PostTagBase):
             'tag_name': self.tag_name,
             'tagged_posts': len(self.blogpost_set)
         }
+
 
 class BlogPost(PostBase):
     tags = models.ManyToManyField(

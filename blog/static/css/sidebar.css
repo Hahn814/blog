@@ -6,7 +6,6 @@
 
 #sidebar, #content {
   height: 100%;
-  overflow:auto;
   float:right;
   transition: width .35s;
 }
