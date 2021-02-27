@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from django.core.management.utils import get_random_secret_key
 from pathlib import Path
 import os
+import mimetypes
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -169,3 +170,5 @@ LOGGING = {
 MEDIA_NAME = 'media'
 MEDIA_ROOT = os.path.join(BASE_DIR, MEDIA_NAME)
 MEDIA_URL = '/{}/'.format(MEDIA_NAME)
+
+mimetypes.add_type('text/css', '.css', True)

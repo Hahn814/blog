@@ -1,0 +1,17 @@
+version: "3.7"
+services:
+  web:
+    image: pbh/webapp
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "8001:8010"
+    command: /bin/sh -c "while sleep 1000; do :; done"
+    volumes:
+      - "./:/opt/app/WebApp"
+    environment:
+      - DJANGO_SUPERUSER_USERNAME=DJANGO_SUPERUSER_USERNAME
+      - DJANGO_SUPERUSER_PASSWORD=$DJANGO_SUPERUSER_PASSWORD
+      - DJANGO_SUPERUSER_EMAIL=$DJANGO_SUPERUSER_EMAIL
+    entrypoint: /opt/app/WebApp/start-server.sh
