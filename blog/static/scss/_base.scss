@@ -1,0 +1,32 @@
+* {
+	box-sizing: border-box;
+}
+html {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	font-family: 'segoe ui';
+}
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	font-family: 'segoe ui';
+}
+body.noscroll {
+	position: fixed;
+	overflow: hidden;
+	bottom: 0;
+}
+#content {
+	width: 85%;
+	padding: 10px;
+	height: 99%;
+	overflow-y: scroll;
+	grid-area: content;
+	display: inline-block;
+}
+#sidebar {
+	background-color: gray;
+	grid-area: sidebar;
+}

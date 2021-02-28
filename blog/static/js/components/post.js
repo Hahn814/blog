@@ -53,7 +53,7 @@ class Post extends HTMLElement {
     const body = contentWrapper.appendChild(
         document.createElement('div')
     );
-    body.setAttribute('class', 'post-body');
+    body.setAttribute('class', this.postBodayClass);
     body.setAttribute('style', `
       padding-left: 20px;
     `);
@@ -76,7 +76,6 @@ class Post extends HTMLElement {
 
   connectedCallback() {
     console.log('Custom Post element added to page.');
-    applyCollpaseEvent( this , this.postBodayClass );
   }
 
   disconnectedCallback() {
@@ -89,26 +88,8 @@ class Post extends HTMLElement {
 
   attributeChangedCallback(name, oldValue, newValue) {
     console.log('Custom Post element attributes changed.');
-    updateStyle(this);
   }
 
 }
 
 customElements.define('post-item', Post);
-
-function applyCollpaseEvent( elem, div ) {
-  const shadow = elem.shadowRoot;
-  shadow.querySelector('.post-collapse').addEventListener('click', function () {
-    this.classList.toggle('collapsed');
-    const wrapper = shadow.querySelector('.' + div);
-
-    if ( this.classList.contains('collapsed') ){
-      wrapper.style.display = "none";
-      this.innerHTML = '<ion-icon name="chevron-down-outline"></ion-icon>';
-
-    } else {
-      wrapper.style.display = "block";
-      this.innerHTML = '<ion-icon name="chevron-up-outline"></ion-icon>';
-    }
-  });
-}

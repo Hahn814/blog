@@ -1,0 +1,24 @@
+#toggle-sidebar {
+	width: 30px;
+	height: 30px;
+	float: right;
+}
+#sidebar {
+	height: 100%;
+	float: right;
+	transition: width .35s;
+	width: 15%;
+}
+#content {
+	height: 100%;
+	float: right;
+	transition: width .35s;
+}
+#sidebar.collapsed {
+	width: 0;
+	+ {
+		#content {
+			width: 100%;
+		}
+	}
+}
