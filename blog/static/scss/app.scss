@@ -1,3 +1,24 @@
+$palette: (
+  primary: #8e3329,
+  accent: #d98328,
+  secondary: #5a1321,
+  foreground: #191919,
+  background: #e9e9e9
+);
+
+@function color-palette($key: 'primary') {
+  @return map-get(
+    $palette,
+    $key
+  )
+}
+
+$color-primary: color-palette('primary');
+$color-accent: color-palette('accent');
+$color-secondary: color-palette('secondary');
+$color-foreground: color-palette('foreground');
+$color-background: color-palette('background');
+
 @import "base";
 @import "sidebar";
 @import "navbar";
