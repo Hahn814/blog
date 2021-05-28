@@ -1,18 +1,28 @@
 version: "3.7"
+
 services:
   web:
     image: pbh/webapp
     build:
       context: .
       dockerfile: ./Dockerfile
-    ports:
-      - "8001:8010"
+    expose:
+      8010
     command: /bin/sh -c "while sleep 1000; do :; done"
     volumes:
       - "./:/opt/app/WebApp"
     environment:
-      - DJANGO_SUPERUSER_USERNAME=$DJANGO_SUPERUSER_USERNAME
-      - DJANGO_SUPERUSER_PASSWORD=$DJANGO_SUPERUSER_PASSWORD
-      - DJANGO_SUPERUSER_EMAIL=$DJANGO_SUPERUSER_EMAIL
       - SECRET_KEY=$SECRET_KEY
+    env_file: ./web/.env
     entrypoint: /opt/app/WebApp/start-server.sh
+
+  nginx:
+    image: nginx:1.21.0-alpine
+    volumes:
+      - ./nginx/conf:/etc/nginx/templates
+    ports:
+      - "8001:80"
+    environment:
+      - NGINX_PORT=80
+    env_file: ./nginx/.env
+    
