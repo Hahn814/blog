@@ -1,6 +1,5 @@
-# Blog
-
 ```
-docker build -t webapp .
-docker run -it -p 8020:8020 -e DJANGO_SUPERUSER_USERNAME=DJANGO_SUPERUSER_USERNAME -e DJANGO_SUPERUSER_PASSWORD=$DJANGO_SUPERUSER_PASSWORD -e DJANGO_SUPERUSER_EMAIL=$DJANGO_SUPERUSER_EMAIL webapp:latest
+docker kill $(docker ps -aq) && docker rm $(docker ps -aq)
+export SECRET_KEY=$(python WebApp/utils/generate_secret_key.py)
+docker-compose up -d --build
 ```
