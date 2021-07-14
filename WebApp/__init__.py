@@ -1,5 +1,0 @@
-__author__ = "Paul Hahn"
-__maintainer__ = "Paul Hahn"
-__version__ = "1.0.0"
-__email__ = "paulhahn18@gmail.com"
-__status__ = "Functional"
