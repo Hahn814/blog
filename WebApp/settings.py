@@ -12,9 +12,20 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 import mimetypes
+from collections import defaultdict
+
+from yaml import load, Loader
+import logging
+
+LOGGER = logging.getLogger(__name__)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+DB_CONFIG = os.path.join(
+    BASE_DIR,
+    'db',
+    os.environ.get("DB_CONFIG_NAME", 'db-config.yml')
+)
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # Quick-start development settings - unsuitable for production
@@ -171,3 +182,21 @@ MEDIA_ROOT = os.path.join(BASE_DIR, MEDIA_NAME)
 MEDIA_URL = '/{}/'.format(MEDIA_NAME)
 
 mimetypes.add_type('text/css', '.css', True)
+
+
+def load_yaml_database_config():
+    LOGGER.debug(f"Loading DB config from YAML: {DB_CONFIG}")
+    config = defaultdict(dict)
+
+    with open(DB_CONFIG, 'r') as f:
+        data = load(f, Loader=Loader)
+        if data:
+            databases: dict = data.get('databases', [])
+            
+            for alias, db_prop in databases.items():
+                config[alias].update(db_prop)
+
+    return config
+
+
+DATABASES = load_yaml_database_config()

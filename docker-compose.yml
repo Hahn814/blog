@@ -1,6 +1,20 @@
 version: "3.7"
 
 services:
+
+  db:
+    image: postgres:12.7-alpine3.14
+    build:
+      context: ./db
+      dockerfile: Dockerfile
+    expose:
+      - 5432
+    volumes:
+      - 'psql_volume:/var/lib/postgresql/data'
+    env_file: ./blog/.env
+    networks:
+      - web_app_network
+
   web:
     image: pbh/webapp
     build:
@@ -12,6 +26,10 @@ services:
       - "./:/opt/app/WebApp"
       - "static_volume:/opt/app/WebApp/static"
     env_file: ./blog/.env
+    networks:
+      - web_app_network
+    depends_on:
+      - db
 
   nginx:
     image: nginx:1.21.0-alpine
@@ -23,6 +41,12 @@ services:
     env_file: ./nginx/.env
     depends_on:
       - web
+    networks:
+      - web_app_network
 
 volumes:
   static_volume:
+  psql_volume:
+
+networks:
+  web_app_network:
