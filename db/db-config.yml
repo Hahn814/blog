@@ -1,5 +1,9 @@
 databases:
+
   default:
-    - POSTGRES_PASSWORD: 'CHANGEME'
-    - POSTGRES_USER: 'dev_user'
-    - POSTGRES_DB: 'dev_db'
+    PASSWORD: 'PLACEHOLDER'
+    USER: 'dev_user'
+    NAME: 'dev_db'
+    ENGINE: 'django.db.backends.postgresql'
+    PORT: '5432'
+    HOST: 'db'
