@@ -38,7 +38,10 @@ services:
       - ./nginx/certs:/etc/nginx/certs
       - "static_volume:/opt/app/WebApp/static:ro"
     command: [nginx-debug, '-g', 'daemon off;']
-    ports:
+    expose:
+      - 443
+      - 80
+    ports: 
       - "8001:443"
     env_file: ./nginx/.env
     depends_on:
